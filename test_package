@@ -6,3 +6,6 @@
       name: "{{ package_name }}"
       state: latest
     register: package
+  -  name : debug message
+     debug:
+       msg: "{{ package.results }}"
