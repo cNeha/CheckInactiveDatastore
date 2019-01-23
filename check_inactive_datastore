@@ -1,3 +1,7 @@
+###############################################
+##This method will check the inactive datastore
+###################################################
+
 begin
   require 'rest-client'
   @method = 'check_inactive_datastore'
