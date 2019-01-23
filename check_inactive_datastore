@@ -5,7 +5,7 @@
 begin
   require 'rest-client'
   @method = 'check_inactive_datastore'
-#  $evm.log("info", "-----------EVM automate Method: started")
+  $evm.log("info", "-----------EVM automate Method: started")
   @debug = true
   #
   # get variables
@@ -40,27 +40,25 @@ prov.eligible_hosts.each do |h|
    next if h.maintenance
    next unless h.power_state == "on"
    nvm = h.vms.length
-   if min_registered_length.nil? || nvms < min_registered_vms
-
-
-h.writable_storages.find_all { |s| 
-# Get Datastore infromaiton
-url = "https://#{server}/rest/vcenter/datastore/#{s.name}"
-  result = JSON.load(RestClient::Request.execute({
+   
+if min_registered_length.nil? || nvms < min_registered_vms
+ h.writable_storages.find_all { |s| 
+      # Get Datastore infromaiton
+      url = "https://#{server}/rest/vcenter/datastore/#{s.name}"
+      result = JSON.load(RestClient::Request.execute({
                         :method => :get,
                         :url => url,
                         :verify_ssl => false,
                         :headers => {:content_type => 'application/json', 'vmware-api-session-id' => session_id }}))
-  puts "Result is #{result}"
-  accessible = result['value']['accessible'] 
-    storage = s
-    host = h
-    min_registered_vms = nvms
-    break if accessible
-  end
-}
+      puts "Result is #{result}"
+      accessible = result['value']['accessible'] 
+      storage = s
+      host = h
+      min_registered_vms = nvms
+      break if accessible
+  }
+ end
 end
-
 #set host and storage
  
 prov.set_host(host) if host
