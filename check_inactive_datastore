@@ -36,7 +36,7 @@ $evm.log(:info, "vm=[#{vm.name}], space required=[#{vm.provisioned_storage}]")
 host = storage = nil
 min_registered_vms = nil
 
-prov.eligibel_hosts.each do |h|
+prov.eligible_hosts.each do |h|
    next if h.maintenance
    next unless h.power_state == "on"
    nvm = h.vms.length
