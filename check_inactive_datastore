@@ -23,7 +23,7 @@ $evm.log(:info, "vm=[#{vm.name}], space required=[#{vm.provisioned_storage}]")
                                   :url => session_url,
                                   :verify_ssl => false,
                                   :user => "administrator@vsphere.local",
-                                :password => "password",
+                                  :password => "password",
                                   :headers => {:content_type => 'application/json'}}))
    $evm.log(:info, "Result is #{session_result}")
    session_id = session_result['value']
@@ -54,7 +54,7 @@ url = "https://#{server}/rest/vcenter/datastore/#{s.name}"
     host = h
     min_registered_vms = nvms
     break  
- end
+  end
 }
 end
 
@@ -64,4 +64,4 @@ prov.set_host(host) if host
 prov.set_storage(storage) if storage
 
 $evm.log("info", "vm=[#{vm.name}] host=[#{host}] storage=[#{storage}]")
-     
+end
