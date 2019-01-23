@@ -15,7 +15,7 @@ begin
 $evm.log(:info, "vm=[#{vm.name}], space required=[#{vm.provisioned_storage}]")
 
   # Get token
-   server = "vcenter-et.gsslab.pnq2.redhat.com"
+   server = "<vmware ip address>"
    session_url = "https://#{server}/rest/com/vmware/cis/session"
    session_result = []
    session_result = JSON.load(RestClient::Request.execute({
@@ -23,7 +23,7 @@ $evm.log(:info, "vm=[#{vm.name}], space required=[#{vm.provisioned_storage}]")
                                   :url => session_url,
                                   :verify_ssl => false,
                                   :user => "administrator@vsphere.local",
-                                :password => "RedHat1!",
+                                :password => "password",
                                   :headers => {:content_type => 'application/json'}}))
    $evm.log(:info, "Result is #{session_result}")
    session_id = session_result['value']
