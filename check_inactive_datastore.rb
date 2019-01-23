@@ -53,11 +53,10 @@ url = "https://#{server}/rest/vcenter/datastore/#{s.name}"
                         :headers => {:content_type => 'application/json', 'vmware-api-session-id' => session_id }}))
   puts "Result is #{result}"
   accessible = result['value']['accessible'] 
-  if accessible
     storage = s
     host = h
     min_registered_vms = nvms
-    break  
+    break if accessible
   end
 }
 end
